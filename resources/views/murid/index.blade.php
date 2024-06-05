@@ -29,12 +29,12 @@
   <tbody>
     @foreach($datasiswa as $item)
       <tr>
-        <td>1</td>
+        <td>{{$item->id}}</td>
         <td>{{$item->nama}}</td>
         <td>{{$item->alamat}}</td>
         <td>
-            <a href="" class="btn btn-warning">Edit</a>
-            <a href="" class="btn btn-danger">Hapus</a>
+            <a href="{{ route('edit',$item->id) }}"  class="btn btn-warning">Edit</a>
+            <a href="{{ route('hapus',$item->id) }}" class="btn btn-danger">Hapus</a>
         </td>
       </tr>
     @endforeach
@@ -42,9 +42,10 @@
     
   </tbody>
 </table>
+{{ $datasiswa->links('vendor.pagination.bootstrap-5') }}
 </div>
 </div>
 
->       @endsection
+       @endsection
 
         <!-- penutup content dengan endsection -->

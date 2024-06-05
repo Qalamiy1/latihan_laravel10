@@ -8,7 +8,7 @@ class MuridController extends Controller
 {
     public function siswa (Request $request){
         $search=$request->Search;
-        $dataSiswa=Murid::get();
+        $dataSiswa=Murid::paginate(2);
         return view('murid.index',['Search'=>$search,'datasiswa'=>$dataSiswa]);
     }
     public function tambah(){
@@ -19,5 +19,17 @@ class MuridController extends Controller
         'nama'=>$request->nama,
         'alamat'=>$request->alamat
        ]);
+       return redirect()->route('murid');
+    }
+    public function edit($id){
+        $dataSiswa= Murid::where('id',$id)->first();
+
+        return view('murid.edit',[
+            'datasiswa'=>$dataSiswa
+        ]);
+    }
+    public function hapus($id){
+        Murid::where('id',$id)->delete();
+        return redirect()->route('murid');
     }
 }
